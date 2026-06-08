@@ -1,65 +1,55 @@
-import Image from "next/image";
+import { WalletSection } from "@/components/wallet-section";
 
+// Server Component: the hero + banner are server-rendered. Only the wallet
+// widget (which depends on the JAW connector + browser APIs) is client-only,
+// loaded through a `dynamic(ssr:false)` boundary in <WalletSection />.
 export default function Home() {
+  const hasJawKey = Boolean(process.env.NEXT_PUBLIC_JAW_API_KEY);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+    <main className="flex flex-1 flex-col items-center justify-center gap-8 bg-neutral-950 px-4 py-16 text-center">
+      <div className="max-w-lg space-y-3">
+        <span className="inline-block rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-violet-300">
+          JustaLab · example
+        </span>
+        <h1 className="text-4xl font-bold tracking-tight text-white">
+          JAW as default Sign In
+        </h1>
+        <p className="text-pretty text-neutral-400">
+          A custom WalletConnect-style modal with JAW pinned as the primary{" "}
+          <em>Sign In</em>, and every other wallet (MetaMask, Rabby, Ambire…)
+          discovered automatically via EIP-6963. All connection logic is wagmi
+          underneath — nothing hardcoded.
+        </p>
+      </div>
+
+      {!hasJawKey && (
+        <p className="max-w-md rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
+          ⚠️ Set <code className="font-mono">NEXT_PUBLIC_JAW_API_KEY</code> in{" "}
+          <code className="font-mono">.env.local</code> to enable JAW sign-in.
+          Get a key at{" "}
           <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            href="https://jaw.id"
+            className="underline"
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noreferrer"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
+            jaw.id
           </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+          . EIP-6963 wallets still work without it.
+        </p>
+      )}
+
+      <WalletSection />
+
+      <a
+        href="https://docs.jaw.id"
+        target="_blank"
+        rel="noreferrer"
+        className="text-xs text-neutral-500 underline transition hover:text-neutral-300"
+      >
+        @jaw.id/wagmi docs ↗
+      </a>
+    </main>
   );
 }

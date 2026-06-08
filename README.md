@@ -1,5 +1,12 @@
 # JustaLab — JAW Sign In example
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19-149eca?logo=react&logoColor=white)](https://react.dev)
+[![wagmi](https://img.shields.io/badge/wagmi-3-1c1b1b?logo=ethereum&logoColor=white)](https://wagmi.sh)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
+
 A minimal Next.js app that demonstrates the recommended way to offer **JAW as
 the default "Sign In"** while still letting users pick any other wallet
 (MetaMask, Rabby, Ambire…).

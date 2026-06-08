@@ -1,3 +1,9 @@
 ignoredBuiltDependencies:
   - sharp
   - unrs-resolver
+
+# Supply-chain hardening: only install dependency versions (transitive included)
+# that have been published for at least 7 days, so compromised/malicious
+# publishes are caught before we pull them in. Urgent security bumps can bypass
+# this via minimumReleaseAgeExclude or a pnpm.overrides entry.
+minimumReleaseAge: 10080 # minutes = 7 days

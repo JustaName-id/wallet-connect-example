@@ -1,0 +1,22 @@
+version: 2
+updates:
+  # npm/pnpm dependencies (reads pnpm-lock.yaml, transitive included).
+  # cooldown mirrors the pnpm `minimumReleaseAge: 10080` (7 days) set in
+  # pnpm-workspace.yaml, so Dependabot won't bump to a freshly-published
+  # version before the community has had time to flag a malicious publish.
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    cooldown:
+      default-days: 7
+
+  # GitHub Actions are a supply-chain surface too (compromised action tags),
+  # so apply the same 7-day cooldown to workflow action bumps.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7

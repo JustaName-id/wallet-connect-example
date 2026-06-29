@@ -12,7 +12,7 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@jaw.id/wagmi": "^0.1.19",
+    "@jaw.id/wagmi": "^0.1.22",
     "@tanstack/react-query": "5.100.9",
     "@walletconnect/ethereum-provider": "^2.23.9",
     "next": "16.2.7",
